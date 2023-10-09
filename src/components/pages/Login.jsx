@@ -1,59 +1,82 @@
-import React, { useState } from "react";
-import "../../css/Login.css";
-import { Link } from "react-router-dom";
-import {
-  MDBBtn,
-  MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
-  MDBModalBody,
-  MDBModalFooter,
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCardText,
-  MDBRipple,
-  MDBCardImage,
-  MDBInput,
-  MDBCheckbox,
-} from "mdb-react-ui-kit";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import logo from "../../images/logo.svg";
+import "../../css/Login.css"
 
-import "mdb-react-ui-kit/dist/css/mdb.min.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import AppLoading from "../organisms/AppLoading";
+import { Alert } from "@mui/material";
+import { saveToken } from "../../helpers/Auth";
 
-import user_icon from "../../Assets/person.png"
-import email_icon from "../../Assets/email.png"
-import password_icon from "../../Assets/password.png"
+export default function Login() {
+  const navigate = useNavigate();
 
-export const Login = () => {
-  const [action, setAction] = useState("Login");
-  return (
-    <div className='container'>
-      <div className='header'>
-        <div className='text'>{action}</div>
-        <div className='underline'></div>
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [showError, setShowError] = React.useState(false);
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+
+    setIsLoading(true);
+
+    fetch(`http://localhost:8080/auth/login`, {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      headers: { "Content-type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then(({ token }) => {
+        saveToken(token);
+        navigate("/dashboard");
+      })
+      .catch(() => {
+        setEmail("");
+        setPassword("");
+        setShowError(true);
+        setIsLoading(false);
+      });
+  };
+
+  const handleInputFocus = () => {
+    setShowError(false);
+  };
+
+  return isLoading ? (
+    <AppLoading />
+  ) : (
+    <div className="container">
+    <div className="login_center">
+      <div className="login__logo">
+        <img src={logo} className="responsive" alt="" />
       </div>
-      <div className='inputs'>
-        <div className='input'>
-          <img src={email_icon} alt='' />
-          <input type='text' placeholder="Email" />
+      <form onSubmit={handleLogin} className="inputs">
+        <div className="input">
+          <input
+            type="email"
+            placeholder="Usuário"
+            name="email"
+            id="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            onFocus={handleInputFocus}
+          />
         </div>
-        <div className='input'>
-          <img src={password_icon} alt='' />
-          <input type='password' placeholder="Senha" />
+        <div className="input">
+          <input
+            type="password"
+            placeholder="Senha"
+            name="password"
+            id="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+            onFocus={handleInputFocus}
+          />
         </div>
-        </div>
-        <div className="forgot-password"><span>Esqueci minha senha</span></div>
-        <div className="submit-container">
-          <div className={action==="Login"?"submit gray":"submit"} onClick={()=>{setAction("Login")}}>Entrar</div>
-        </div>
-        </div>
-  )
+        {showError && <Alert severity="error">Credenciais com erro!</Alert>}
+        <button className="submit">Entrar</button>
+      </form>
+    </div>
+    </div>
+  );
 }
-
-export default Login;
