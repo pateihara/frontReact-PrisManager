@@ -1,9 +1,11 @@
+body{
+  background-color: #390099;
+}
 .container {
   display: flex;
   flex-direction: column;
   margin: auto;
   margin-top: 200px;
-  background: #fff;
   padding-bottom: 30px;
 }
 .login_center {
@@ -39,15 +41,10 @@
   font-size: 19px;
 }
 .submit{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 220px;
-  height: 59px;
+  height: 80px;
   color: #fff;
-  background: #0d6efd;
-  border-radius: 50px;
+  background: #ff0054;
+  border-radius: 4px;
   font-size: 19px;
   font-weight: 700;
-  cursor: pointer;
 }

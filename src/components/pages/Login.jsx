@@ -7,6 +7,8 @@ import AppLoading from "../organisms/AppLoading";
 import { Alert } from "@mui/material";
 import { saveToken } from "../../helpers/Auth";
 
+import { MDBBtn, MDBCardBody } from "mdb-react-ui-kit";
+
 export default function Login() {
   const navigate = useNavigate();
 
@@ -45,7 +47,7 @@ export default function Login() {
   return isLoading ? (
     <AppLoading />
   ) : (
-    <div className="container">
+    <MDBCardBody>
       <div className="login_center">
         <div className="login__logo">
           <img src={logo} className="responsive" alt="" />
@@ -74,9 +76,9 @@ export default function Login() {
             />
           </div>
           {showError && <Alert severity="error">Credenciais com erro!</Alert>}
-          <button className="submit">Entrar</button>
+          <MDBBtn className="submit">Entrar</MDBBtn>
         </form>
       </div>
-    </div>
+    </MDBCardBody>
   );
 }
