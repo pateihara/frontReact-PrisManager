@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import logo from "../../images/logoHorizontal.svg";
+import "../../css/Sidebar.css";
 
 function Sidebar({ openSidebarToggle, OpenSidebar }) {
   return (
@@ -9,11 +11,8 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
     >
       <div className="sidebar-title">
         <div className="sidebar-brand">
-          <p className="icon_header" /> PrisManager
+          <img src={logo} className="logo" alt="" />
         </div>
-        <span className="icon close_icon" onClick={OpenSidebar}>
-          X
-        </span>
       </div>
 
       <ul className="sidebar-list">

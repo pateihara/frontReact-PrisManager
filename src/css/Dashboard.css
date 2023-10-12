@@ -62,7 +62,7 @@ body {
 #sidebar {
   grid-area: sidebar;
     height: 100%;
-    background: linear-gradient(158deg, rgba(255,0,84,1) 0%, rgba(57,0,153,1) 70%, rgba(57,0,153,1) 100%);
+    background: linear-gradient(158deg, rgba(57,0,153,1) 0%, rgba(57,0,153,1) 41%, rgba(255,0,84,1) 97%);
     overflow-y: auto;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
