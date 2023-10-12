@@ -62,7 +62,7 @@ body {
 #sidebar {
   grid-area: sidebar;
     height: 100%;
-    background-color: #0d6efd;
+    background: linear-gradient(158deg, rgba(255,0,84,1) 0%, rgba(57,0,153,1) 70%, rgba(57,0,153,1) 100%);
     overflow-y: auto;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
@@ -86,6 +86,7 @@ body {
   margin-top: 15px;
   font-size: 20px;
   font-weight: 700;
+  color: white;
 }
 
 .sidebar-list {
@@ -128,6 +129,7 @@ body {
   overflow-y: auto;
   padding: 20px 20px;
   color: rgba(255, 255, 255, 0.95);
+  background-color: #ffecd1;
 }
 
 .main-title {
@@ -149,22 +151,33 @@ body {
   justify-content: space-around;
   padding: 8px 15px;
   border-radius: 5px;
+  font-family: "Roboto", sans-serif !important;
+
 }
 
+
 .cardBlue {
-  background-color: #2962ff !important;
+  background-color: #390099 !important;
+  height: 10rem !important;
+
 }
 
 .cardYellow {
-  background-color: #ff6d00 !important;
+  background-color: #9e0059 !important;
+  height: 10rem !important;
+
 }
 
 .cardGreen {
-  background-color: #2e7d32 !important;
+  background-color: #ff0054 !important;
+  height: 10rem !important;
+
 }
 
 .cardRed {
-  background-color: #d50000 !important;
+  background-color: #ff5400 !important;
+  height: 10rem !important;
+
 }
 
 .card-inner {

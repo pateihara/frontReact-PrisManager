@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "@fortawesome/fontawesome-free/css/all.min.css";
 
 function Sidebar({ openSidebarToggle, OpenSidebar }) {
   return (
@@ -19,7 +18,7 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
 
       <ul className="sidebar-list">
         <li className="sidebar-list-item ">
-          <Link to="/clients">dashboard</Link>
+          <Link to="/dashboard">dashboard</Link>
         </li>
         <li className="sidebar-list-item ">
           <Link to="/clients">clientes</Link>
