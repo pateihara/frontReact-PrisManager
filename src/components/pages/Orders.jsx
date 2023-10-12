@@ -1,10 +1,9 @@
 import { useState } from "react";
-import "../../css/Dashboard.css";
 import Header from "../molecules/Header";
 import Sidebar from "../molecules/Sidebar";
-import ClientList from "../molecules/ClientList";
+import OrderList from "../molecules/OrderList";
 
-function Clients() {
+function Orders() {
   const [openSidebarToggle, setOpenSidebarToggle] = useState(false);
 
   const OpenSidebar = () => {
@@ -18,9 +17,9 @@ function Clients() {
         openSidebarToggle={openSidebarToggle}
         OpenSidebar={OpenSidebar}
       />
-      <ClientList />
+      <OrderList />
     </div>
   );
 }
 
-export default Clients;
+export default Orders;

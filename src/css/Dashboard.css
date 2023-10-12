@@ -1,7 +1,6 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #fff;
   color: #fff;
   font-family: 'Poppins', sans-serif;
 }
@@ -67,6 +66,8 @@ body {
     overflow-y: auto;
     transition: all 0.5s;
     -webkit-transition: all 0.5s;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 100;
 }
 
 .sidebar-title {
@@ -150,20 +151,20 @@ body {
   border-radius: 5px;
 }
 
-.card:first-child {
-  background-color: #2962ff;
+.cardBlue {
+  background-color: #2962ff !important;
 }
 
-.card:nth-child(2) {
-  background-color: #ff6d00;
+.cardYellow {
+  background-color: #ff6d00 !important;
 }
 
-.card:nth-child(3) {
-  background-color: #2e7d32;
+.cardGreen {
+  background-color: #2e7d32 !important;
 }
 
-.card:nth-child(4) {
-  background-color: #d50000;
+.cardRed {
+  background-color: #d50000 !important;
 }
 
 .card-inner {

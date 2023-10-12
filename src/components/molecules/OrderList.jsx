@@ -8,7 +8,6 @@ import {
   MDBModalTitle,
   MDBModalBody,
   MDBModalFooter,
-  MDBContainer,
   MDBRow,
   MDBCol,
   MDBCard,
@@ -18,21 +17,19 @@ import {
   MDBRipple,
   MDBCardImage,
   MDBInput,
-  MDBCheckbox,
 } from "mdb-react-ui-kit";
-
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-export default function Clients() {
+function OrderList() {
   const [basicModal, setBasicModal] = useState(false);
   const toggleShow = () => setBasicModal(!basicModal);
 
   return (
-    <MDBContainer>
+    <main className="main-container">
       <MDBRow>
         <MDBCol size="4">
-          <MDBCard>
+          <MDBCard className="card">
             <MDBRipple
               rippleColor="light"
               rippleTag="div"
@@ -43,12 +40,10 @@ export default function Clients() {
                 fluid
                 alt="..."
               />
-              <a>
-                <div
-                  className="mask"
-                  style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
-                ></div>
-              </a>
+              <div
+                className="mask"
+                style={{ backgroundColor: "rgba(251, 251, 251, 0.15)" }}
+              ></div>
             </MDBRipple>
             <MDBCardBody>
               <MDBCardTitle>dados do cliente</MDBCardTitle>
@@ -165,6 +160,7 @@ export default function Clients() {
           </MDBCard>
         </MDBCol>
       </MDBRow>
-    </MDBContainer>
+    </main>
   );
 }
+export default OrderList;

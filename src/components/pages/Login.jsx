@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../../images/logo.svg";
-import "../../css/Login.css"
+import "../../css/login.css";
 
 import AppLoading from "../organisms/AppLoading";
 import { Alert } from "@mui/material";
@@ -46,37 +46,37 @@ export default function Login() {
     <AppLoading />
   ) : (
     <div className="container">
-    <div className="login_center">
-      <div className="login__logo">
-        <img src={logo} className="responsive" alt="" />
+      <div className="login_center">
+        <div className="login__logo">
+          <img src={logo} className="responsive" alt="" />
+        </div>
+        <form onSubmit={handleLogin} className="inputs">
+          <div className="input">
+            <input
+              type="email"
+              placeholder="Usuário"
+              name="email"
+              id="email"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              onFocus={handleInputFocus}
+            />
+          </div>
+          <div className="input">
+            <input
+              type="password"
+              placeholder="Senha"
+              name="password"
+              id="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+              onFocus={handleInputFocus}
+            />
+          </div>
+          {showError && <Alert severity="error">Credenciais com erro!</Alert>}
+          <button className="submit">Entrar</button>
+        </form>
       </div>
-      <form onSubmit={handleLogin} className="inputs">
-        <div className="input">
-          <input
-            type="email"
-            placeholder="Usuário"
-            name="email"
-            id="email"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            onFocus={handleInputFocus}
-          />
-        </div>
-        <div className="input">
-          <input
-            type="password"
-            placeholder="Senha"
-            name="password"
-            id="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            onFocus={handleInputFocus}
-          />
-        </div>
-        {showError && <Alert severity="error">Credenciais com erro!</Alert>}
-        <button className="submit">Entrar</button>
-      </form>
-    </div>
     </div>
   );
 }
