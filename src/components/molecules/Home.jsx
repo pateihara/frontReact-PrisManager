@@ -108,8 +108,8 @@ function Home() {
           <MDBCard>
             <MDBCardBody>
               <MDBCardTitle>dados do cliente</MDBCardTitle>
-              <div>
-                <ResponsiveContainer width="100%" height="100%">
+              <div className="charts">
+                <ResponsiveContainer width="200%" height="100%">
                   <BarChart
                     width={500}
                     height={300}
@@ -139,19 +139,9 @@ function Home() {
           <MDBCard>
             <MDBCardBody>
               <MDBCardTitle>dados do cliente</MDBCardTitle>
-              <div>
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart
-                    width={500}
-                    height={300}
-                    data={data}
-                    margin={{
-                      top: 5,
-                      right: 30,
-                      left: 20,
-                      bottom: 5,
-                    }}
-                  >
+              <div className="charts">
+                <ResponsiveContainer width="200%" height="100%">
+                  <LineChart width={500} height={300} data={data}>
                     <CartesianGrid strokeDasharray="3 3" />
                     <XAxis dataKey="name" />
                     <YAxis />
