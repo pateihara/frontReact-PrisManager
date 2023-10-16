@@ -48,7 +48,6 @@ export default function Login() {
     <AppLoading />
   ) : (
     <MDBCardBody>
-    <div className="login">
       <div className="login_center">
         <div className="login__logo">
           <img src={logo} className="responsive" alt="" />
@@ -77,10 +76,9 @@ export default function Login() {
             />
           </div>
           {showError && <Alert severity="error">Credenciais com erro!</Alert>}
-          <MDBBtn className='me-1' color='danger'>Entrar</MDBBtn>
+          <MDBBtn className="submit">Entrar</MDBBtn>
         </form>
       </div>
-    </div>
     </MDBCardBody>
   );
 }
