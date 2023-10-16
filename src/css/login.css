@@ -1,5 +1,10 @@
-body{
-  background-color: #390099;
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  height: 100vh;
+  background: linear-gradient(158deg, rgba(57, 0, 153, 1) 0%, rgba(57, 0, 153, 1) 41%, rgba(255, 0, 84, 1) 97%);
 }
 .container {
   display: flex;
@@ -12,12 +17,12 @@ body{
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 9px;
+  margin: auto;
   width: 100%;
-  margin-top: 30px;
+  height: 100%;
 }
 .inputs {
-  margin-top: 55px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -40,11 +45,72 @@ body{
   color: #797979;
   font-size: 19px;
 }
-.submit{
+.me-1{
   height: 80px;
-  color: #fff;
-  background: #ff0054;
   border-radius: 4px;
   font-size: 19px;
   font-weight: 700;
+}
+.responsive {
+  width: 480px;
+  height: 180px;
+  margin: 30px;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .login {
+    background: linear-gradient(158deg, rgba(57, 0, 153, 1) 0%, rgba(57, 0, 153, 1) 41%, rgba(255, 0, 84, 1) 97%);
+  }
+
+  .container {
+    margin-top: 10px;
+    padding: 10px;
+  }
+
+  .input {
+    width: 100%;
+    max-width: 400px;
+  }
+  .responsive {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .login {
+      background: linear-gradient(158deg, rgba(57, 0, 153, 1) 0%, rgba(57, 0, 153, 1) 41%, rgba(255, 0, 84, 1) 97%);
+    }
+  
+    .container {
+      margin-top: 10px;
+      padding: 10px;
+    }
+  
+    .input {
+      width: 100%;
+      max-width: 400px;
+    }
+    .responsive {
+        width: 100%;
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+  .login {
+      background: linear-gradient(158deg, rgba(57, 0, 153, 1) 0%, rgba(57, 0, 153, 1) 41%, rgba(255, 0, 84, 1) 97%);
+    }
+  
+    .container {
+      margin-top: 10px;
+      padding: 10px;
+    }
+  
+    .input {
+      width: 100%;
+      max-width: 400px;
+    }
+    .responsive {
+          width: 100%;
+    }
 }
