@@ -10,9 +10,9 @@ export default function Logout() {
   React.useEffect(() => {
     setTimeout(() => {
       removeToken();
-      navigate("/landing");
+      navigate("/");
     }, 1500);
   }, [navigate]);
 
-  return <AppLoading message="Desconectando ..." />;
+  return <AppLoading message="Desconectando a aplicação..." />;
 }
