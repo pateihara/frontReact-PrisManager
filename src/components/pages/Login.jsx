@@ -22,11 +22,14 @@ export default function Login() {
 
     setIsLoading(true);
 
-    fetch(`http://localhost:8080/auth/login`, {
-      method: "POST",
-      body: JSON.stringify({ email, password }),
-      headers: { "Content-type": "application/json" },
-    })
+    fetch(
+      `https://prismanager-back-end-5y3x7xfa2-pateiharas-projects.vercel.app/auth/login`,
+      {
+        method: "POST",
+        body: JSON.stringify({ email, password }),
+        headers: { "Content-type": "application/json" },
+      }
+    )
       .then((response) => response.json())
       .then(({ token }) => {
         saveToken(token);
