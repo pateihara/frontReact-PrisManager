@@ -7,10 +7,9 @@ import {
   MDBRow,
 } from "mdb-react-ui-kit";
 import {
-  BsFillArchiveFill,
-  BsFillGrid3X3GapFill,
+  BsAirplaneFill,
   BsPeopleFill,
-  BsFillBellFill,
+  BsCartFill,
 } from "react-icons/bs";
 import {
   BarChart,
@@ -76,29 +75,29 @@ function Home() {
       <div className="main-cards">
         <div className="card cardBlue">
           <div className="card-inner">
-            <h6>total de solicitações</h6>
-            <BsFillArchiveFill className="card_icon" />
+            <h6>Total de vendas</h6>
+            <BsCartFill className="card_icon" />
           </div>
           <h1>300</h1>
         </div>
         <div className="card cardYellow">
           <div className="card-inner">
-            <h6>vendas concluídas</h6>
-            <BsFillGrid3X3GapFill className="card_icon" />
+            <h6>Vendas semanais</h6>
+            <BsCartFill className="card_icon" />
           </div>
           <h1>12</h1>
         </div>
         <div className="card cardGreen">
           <div className="card-inner">
-            <h6>clientes cadastrados</h6>
-            <BsPeopleFill className="card_icon" />
+            <h6>Pacotes</h6>
+            <BsAirplaneFill className="card_icon" />
           </div>
           <h1>33</h1>
         </div>
         <div className="card cardRed">
           <div className="card-inner">
-            <h6>oportunidades</h6>
-            <BsFillBellFill className="card_icon" />
+            <h6>Clientes</h6>
+            <BsPeopleFill className="card_icon" />
           </div>
           <h1>42</h1>
         </div>
