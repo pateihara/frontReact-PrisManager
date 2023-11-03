@@ -1,86 +1,70 @@
-import React, { useState } from "react";
-import {
-  MDBBtn,
-  MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
-  MDBModalBody,
-  MDBModalFooter,
-} from "mdb-react-ui-kit";
+import React, { useState, useEffect } from "react";
+import { MDBBtn, MDBModal } from "mdb-react-ui-kit";
+
+import "../../css/login.css";
+
+import AppLoading from "../organisms/AppLoading";
 
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
-function ClientList() {
+export default function ClientList() {
   const [basicModal, setBasicModal] = useState(false);
+  const [clients, setClients] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  useEffect(() => {
+    setIsLoading(true);
+
+    // Fetch data from your API when the component mounts
+    fetch(
+      "https://prismanager-back-end-api-pateiharas-projects.vercel.app/listClients/"
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Falha na solicitação à API");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Dados da API:", data); // Para depuração
+
+        if (Array.isArray(data) && data.length > 0) {
+          const clientData = data[0].client;
+
+          // Certifique-se de que 'clientData' contenha os dados do cliente
+          if (clientData) {
+            setClients([clientData]);
+          } else {
+            console.error(
+              "Os dados do cliente não foram encontrados na resposta da API."
+            );
+          }
+        } else {
+          console.error("A resposta da API não possui dados válidos.");
+        }
+
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Erro na solicitação à API:", error); // Adicione esta linha para depuração
+      });
+  }, []); // O array vazio [] garante que este efeito seja executado apenas uma vez na montagem
+
   const toggleShow = () => setBasicModal(!basicModal);
 
-  return (
+  return isLoading ? (
+    <AppLoading />
+  ) : (
     <main className="main-container">
       <div className="card">
         <div className="card-inner">
           <MDBBtn onClick={toggleShow}>adicionar cliente</MDBBtn>
           <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
-            <MDBModalDialog>
-              <MDBModalContent>
-                <MDBModalHeader>
-                  <MDBModalTitle>Adicionar cliente</MDBModalTitle>
-                  <MDBBtn
-                    className="btn-close"
-                    color="none"
-                    onClick={toggleShow}
-                  ></MDBBtn>
-                </MDBModalHeader>
-                <MDBModalBody>
-                  <form class="form-group ">
-                    <label for="cadInputName" class="form-label">
-                      nome
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control mb-3"
-                      id="cadInputName"
-                      aria-describedby="nameHelp"
-                      placeholder="Digite o nome do contato"
-                    />
-                    <label for="cadInputCPF" class="form-label">
-                      CPF
-                    </label>
-                    <input
-                      type="text"
-                      class="form-control mb-3"
-                      id="cadInputName"
-                      aria-describedby="nameHelp"
-                      placeholder="Digite o CPF"
-                    />
-                    <label for="Quantity" class="form-label mb-3">
-                      status da negociação
-                    </label>
-                    <select
-                      id="select-status"
-                      class="form-control prod-options"
-                    >
-                      <option value="novo">Novo</option>
-                      <option value="negociacao">Negociação</option>
-                      <option value="conquistado">Conquistado</option>
-                      <option value="perdido">Perdido</option>
-                    </select>
-                  </form>
-                </MDBModalBody>
-
-                <MDBModalFooter>
-                  <MDBBtn color="secondary" onClick={toggleShow}>
-                    fechar
-                  </MDBBtn>
-                  <MDBBtn>adicionar cliente</MDBBtn>
-                </MDBModalFooter>
-              </MDBModalContent>
-            </MDBModalDialog>
+            {/* Resto do seu código do modal */}
           </MDBModal>{" "}
         </div>
-        <table className="table">
+        <table className="clientTable">
           <thead>
             <tr>
               <th>Id</th>
@@ -90,11 +74,19 @@ function ClientList() {
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody id="listaContatos"></tbody>
+          <tbody id="listaContatos">
+            {clients.map((client) => (
+              <tr key={client._id}>
+                <td>{client._id}</td>
+                <td>{client.client && client.client.name}</td>
+                <td>{client.client && client.client.CPF}</td>
+                <td>{client.state && client.state.status}</td>
+              </tr>
+            ))}
+            ;
+          </tbody>{" "}
         </table>
       </div>
     </main>
   );
 }
-
-export default ClientList;
