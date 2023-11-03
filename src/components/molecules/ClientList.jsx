@@ -30,15 +30,14 @@ export default function ClientList() {
         console.log("Dados da API:", data); // Para depuração
 
         if (Array.isArray(data) && data.length > 0) {
-          const clientData = data[0].client;
+          // Mapeie todos os clientes da resposta
+          const allClients = data.map((item) => item.client);
 
-          // Certifique-se de que 'clientData' contenha os dados do cliente
-          if (clientData) {
-            setClients([clientData]);
+          // Certifique-se de que 'allClients' contenha todos os clientes
+          if (allClients.length > 0) {
+            setClients(allClients);
           } else {
-            console.error(
-              "Os dados do cliente não foram encontrados na resposta da API."
-            );
+            console.error("Nenhum cliente encontrado na resposta da API.");
           }
         } else {
           console.error("A resposta da API não possui dados válidos.");
@@ -46,6 +45,7 @@ export default function ClientList() {
 
         setIsLoading(false);
       })
+
       .catch((error) => {
         console.error("Erro na solicitação à API:", error); // Adicione esta linha para depuração
       });
