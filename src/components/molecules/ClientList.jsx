@@ -30,15 +30,7 @@ export default function ClientList() {
         console.log("Dados da API:", data); // Para depuração
 
         if (Array.isArray(data) && data.length > 0) {
-          // Mapeie todos os clientes da resposta
-          const allClients = data.map((item) => item.client);
-
-          // Certifique-se de que 'allClients' contenha todos os clientes
-          if (allClients.length > 0) {
-            setClients(allClients);
-          } else {
-            console.error("Nenhum cliente encontrado na resposta da API.");
-          }
+          setClients(data);
         } else {
           console.error("A resposta da API não possui dados válidos.");
         }
