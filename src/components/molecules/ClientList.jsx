@@ -18,7 +18,7 @@ export default function ClientList() {
 
     // Fetch data from your API when the component mounts
     fetch(
-      "https://prismanager-back-end-byz07xv4n-pateiharas-projects.vercel.app/listclients/"
+      "https://prismanager-back-end-byz07xv4n-pateiharas-projects.vercel.app/listclients/clients"
     )
       .then((response) => {
         if (!response.ok) {
@@ -62,7 +62,6 @@ export default function ClientList() {
               <th>Id</th>
               <th>Nome</th>
               <th>CPF</th>
-              <th>Status</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -72,7 +71,7 @@ export default function ClientList() {
                 <td>{client._id}</td>
                 <td>{client.name}</td>
                 <td>{client.CPF}</td>
-                <td>{client.status}</td>
+                <td>LINK DO CLIENTID</td>
               </tr>
             ))}
           </tbody>{" "}
