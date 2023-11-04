@@ -88,14 +88,11 @@ function maskLast3DigitsOfCPF(cpf) {
   // Remove caracteres não numéricos do CPF
   cpf = cpf.replace(/\D/g, "");
 
-  // Obtém os dois primeiros dígitos do CPF
-  const first2Digits = cpf.substring(0, 2);
+  // Mantém os dois primeiros dígitos visíveis e mascara o restante
+  cpf = cpf.substring(0, 2) + cpf.substring(2).replace(/\d/g, "X");
 
-  // Aplica a máscara "###.###.##1-34" com os dois primeiros dígitos visíveis
-  cpf = cpf.replace(
-    /(\d{3})(\d{3})\d{2}(\d{2})/,
-    "$1.$2." + first2Digits + "-$4"
-  );
+  // Aplica a máscara "XXX.XXX.XX9-09"
+  cpf = cpf.replace(/(\d{3})(\d{3})(\d{2})(\d{2})/, "$1.$2.$3-$4");
 
   return cpf;
 }
