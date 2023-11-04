@@ -70,9 +70,9 @@ export default function ClientList() {
             {clients.map((client) => (
               <tr key={client._id}>
                 <td>{client._id}</td>
-                <td>{client.client && client.client.name}</td>
-                <td>{client.client && client.client.CPF}</td>
-                <td>{client.state && client.state.status}</td>
+                <td>{client.name}</td>
+                <td>{client.CPF}</td>
+                <td>{client.state}</td>
               </tr>
             ))}
             ;
