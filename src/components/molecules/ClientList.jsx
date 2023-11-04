@@ -72,7 +72,8 @@ export default function ClientList() {
               <tr key={client._id}>
                 <td>{client._id}</td>
                 <td>{client.name}</td>
-                <td>{client.CPF}</td> {/* Agora, o CPF deve estar mascarado */}
+                <td>{client.CPF}</td>{" "}
+                {/* O CPF será mascarado apenas com os três últimos dígitos visíveis */}
                 <td>LINK DO CLIENTID</td>
               </tr>
             ))}
@@ -84,11 +85,7 @@ export default function ClientList() {
 }
 
 function maskLast3DigitsOfCPF(cpf) {
-  // Remove caracteres não numéricos do CPF
-  cpf = cpf.replace(/\D/g, "");
-
   // Mantém apenas os 3 últimos dígitos e aplica a máscara "###.###.###-##"
-  cpf = cpf.slice(-3).replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3-");
-
+  cpf = cpf.slice(-3).replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "###.###.###-$4");
   return cpf;
 }
