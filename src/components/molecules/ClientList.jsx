@@ -72,10 +72,9 @@ export default function ClientList() {
                 <td>{client._id}</td>
                 <td>{client.name}</td>
                 <td>{client.CPF}</td>
-                <td>{client.state}</td>
+                <td>{client.status}</td>
               </tr>
             ))}
-            ;
           </tbody>{" "}
         </table>
       </div>
