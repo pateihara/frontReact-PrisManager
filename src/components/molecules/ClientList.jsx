@@ -85,7 +85,17 @@ export default function ClientList() {
 }
 
 function maskLast3DigitsOfCPF(cpf) {
-  // Mantém apenas os 3 últimos dígitos e aplica a máscara "###.###.###-##"
-  cpf = cpf.slice(-3).replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "###.###.###-$4");
+  // Remove caracteres não numéricos do CPF
+  cpf = cpf.replace(/\D/g, "");
+
+  // Obtém os dois primeiros dígitos do CPF
+  const first2Digits = cpf.substring(0, 2);
+
+  // Aplica a máscara "###.###.##1-34" com os dois primeiros dígitos visíveis
+  cpf = cpf.replace(
+    /(\d{3})(\d{3})\d{2}(\d{2})/,
+    "$1.$2." + first2Digits + "-$4"
+  );
+
   return cpf;
 }
