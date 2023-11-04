@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { MDBBtn, MDBModal } from "mdb-react-ui-kit";
-
 import "../../css/login.css";
-
 import AppLoading from "../organisms/AppLoading";
-
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -30,7 +27,12 @@ export default function ClientList() {
         console.log("Dados da API:", data); // Para depuração
 
         if (Array.isArray(data) && data.length > 0) {
-          setClients(data);
+          // Aplicar máscara de CPF aqui
+          const clientsWithMaskedCPF = data.map((client) => ({
+            ...client,
+            CPF: maskLast3DigitsOfCPF(client.CPF),
+          }));
+          setClients(clientsWithMaskedCPF);
         } else {
           console.error("A resposta da API não possui dados válidos.");
         }
@@ -70,7 +72,7 @@ export default function ClientList() {
               <tr key={client._id}>
                 <td>{client._id}</td>
                 <td>{client.name}</td>
-                <td>{client.CPF}</td>
+                <td>{client.CPF}</td> {/* Agora, o CPF deve estar mascarado */}
                 <td>LINK DO CLIENTID</td>
               </tr>
             ))}
@@ -79,4 +81,14 @@ export default function ClientList() {
       </div>
     </main>
   );
+}
+
+function maskLast3DigitsOfCPF(cpf) {
+  // Remove caracteres não numéricos do CPF
+  cpf = cpf.replace(/\D/g, "");
+
+  // Mantém apenas os 3 últimos dígitos e aplica a máscara "###.###.###-##"
+  cpf = cpf.slice(-3).replace(/(\d{3})(\d{3})(\d{3})/, "$1.$2.$3-");
+
+  return cpf;
 }
