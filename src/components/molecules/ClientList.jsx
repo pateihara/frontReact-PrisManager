@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import {
   MDBBtn,
   MDBModal,
@@ -15,12 +17,13 @@ import "mdb-react-ui-kit/dist/css/mdb.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export default function ClientList() {
+  const navigate = useNavigate();
   const [basicModal, setBasicModal] = useState(false);
   const [clients, setClients] = useState([]);
-  const [isLoading, setIsLoading] = useState(false); // Alterado para "useState"
+  const [isLoading, setIsLoading] = useState(false);
   const [newClientData, setNewClientData] = useState({
     clientName: "",
-    cpf: "",
+    clientCpf: "",
   });
 
   const handleInputChange = (e) => {
@@ -36,7 +39,7 @@ export default function ClientList() {
 
     // Enviar os dados do novo cliente para o servidor
     fetch(
-      "https://prismanager-back-end-1ple8v0as-pateiharas-projects.vercel.app/listclients/",
+      "https://prismanager-back-end-hjro5axc9-pateiharas-projects.vercel.app/listclients",
       {
         method: "POST",
         headers: {
@@ -46,7 +49,7 @@ export default function ClientList() {
       }
     )
       .then((response) => {
-        console.log("Response:", response); // Adicione esta linha para depuração
+        console.log("Response:", response); // linha para depuração
 
         if (!response.ok) {
           throw new Error("Falha na solicitação à API");
@@ -57,7 +60,7 @@ export default function ClientList() {
         console.log("Data:", data);
         // Atualizar a lista de clientes após adicionar um novo cliente
         fetch(
-          "https://prismanager-back-end-1ple8v0as-pateiharas-projects.vercel.app/listclients/clients"
+          "https://prismanager-back-end-hjro5axc9-pateiharas-projects.vercel.app/listclients/clients"
         )
           .then((response) => {
             if (!response.ok) {
@@ -85,10 +88,10 @@ export default function ClientList() {
     console.log("chamada x:", newClientData);
     // Fetch data from your API when the component mounts
     fetch(
-      "https://prismanager-back-end-1ple8v0as-pateiharas-projects.vercel.app/listclients/clients"
+      "https://prismanager-back-end-hjro5axc9-pateiharas-projects.vercel.app/listclients/clients"
     )
       .then((response) => {
-        console.log("Response:", response); // Adicione esta linha para depuração
+        console.log("Response:", response); //linha para depuração
 
         if (!response.ok) {
           throw new Error("Falha na solicitação à API");
@@ -101,7 +104,7 @@ export default function ClientList() {
       })
 
       .catch((error) => {
-        console.error("Erro na solicitação à API:", error); // Adicione esta linha para depuração
+        console.error("Erro na solicitação à API:", error); //linha para depuração
       });
   }, []); // O array vazio [] garante que este efeito seja executado apenas uma vez na montagem
 
@@ -179,7 +182,14 @@ export default function ClientList() {
                 <td>{client._id}</td>
                 <td>{client.name}</td>
                 <td>{client.cpf}</td>
-                <td>LINK DO CLIENTID</td>
+                <td>
+                  <button
+                    onClick={() => navigate(`/clients/${client._id}/orders`)}
+                    className="button-primary"
+                  >
+                    detalhes cliente
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

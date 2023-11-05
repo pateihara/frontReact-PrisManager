@@ -34,10 +34,10 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/clients" element={<Clients />} />
-        <Route path="/clients/orders" element={<Orders />} />
+        <Route path="/clients/:clientId/orders" element={<Orders />} />
         <Route path="/logout" element={<Logout />} />
         <Route element={<ProtectedRoute />}>
-        <Route path="*" element={<div>Not found</div>} />
+          <Route path="*" element={<div>Not found</div>} />
         </Route>
       </Routes>
     </BrowserRouter>
