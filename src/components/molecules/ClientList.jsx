@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { MDBBtn, MDBModal } from "mdb-react-ui-kit";
+import {
+  MDBBtn,
+  MDBModal,
+  MDBModalBody,
+  MDBModalFooter,
+  MDBModalDialog,
+  MDBModalContent,
+  MDBModalHeader,
+  MDBModalTitle,
+} from "mdb-react-ui-kit";
 import "../../css/login.css";
 import AppLoading from "../organisms/AppLoading";
 import "mdb-react-ui-kit/dist/css/mdb.min.css";
@@ -8,36 +17,87 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 export default function ClientList() {
   const [basicModal, setBasicModal] = useState(false);
   const [clients, setClients] = useState([]);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Alterado para "useState"
+  const [newClientData, setNewClientData] = useState({
+    clientName: "",
+    cpf: "",
+  });
 
-  useEffect(() => {
-    setIsLoading(true);
+  const handleInputChange = (e) => {
+    setNewClientData({
+      ...newClientData,
+      [e.target.name]: e.target.value,
+    });
+    console.log("Novos dados do cliente:", newClientData);
+  };
 
-    // Fetch data from your API when the component mounts
+  const addNewClient = () => {
+    console.log("Dados do Cliente a ser Enviados:", newClientData);
+
+    // Enviar os dados do novo cliente para o servidor
     fetch(
-      "https://prismanager-back-end-byz07xv4n-pateiharas-projects.vercel.app/listclients/clients"
+      "https://prismanager-back-end-e59wfm9k1-pateiharas-projects.vercel.app/listclients/",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newClientData),
+      }
     )
       .then((response) => {
+        console.log("Response:", response); // Adicione esta linha para depuração
+
         if (!response.ok) {
           throw new Error("Falha na solicitação à API");
         }
         return response.json();
       })
       .then((data) => {
-        console.log("Dados da API:", data); // Para depuração
+        console.log("Data:", data);
+        // Atualizar a lista de clientes após adicionar um novo cliente
+        fetch(
+          "https://prismanager-back-end-e59wfm9k1-pateiharas-projects.vercel.app/listclients/clients"
+        )
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Falha na solicitação à API");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            setClients(data);
+          })
+          .catch((error) => {
+            console.error("Erro ao obter lista de clientes:", error);
+          });
+      })
+      .catch((error) => {
+        console.error("Erro ao adicionar cliente:", error);
+      });
 
-        if (Array.isArray(data) && data.length > 0) {
-          // Aplicar máscara de CPF aqui
-          const clientsWithMaskedCPF = data.map((client) => ({
-            ...client,
-            CPF: maskLast3DigitsOfCPF(client.CPF),
-          }));
-          setClients(clientsWithMaskedCPF);
-        } else {
-          console.error("A resposta da API não possui dados válidos.");
+    // Fechar a modal após adicionar o cliente
+    setBasicModal(false);
+  };
+
+  useEffect(() => {
+    setIsLoading(true);
+    console.log("chamada x:", newClientData);
+    // Fetch data from your API when the component mounts
+    fetch(
+      "https://prismanager-back-end-e59wfm9k1-pateiharas-projects.vercel.app/listclients/clients"
+    )
+      .then((response) => {
+        console.log("Response:", response); // Adicione esta linha para depuração
+
+        if (!response.ok) {
+          throw new Error("Falha na solicitação à API");
         }
-
+        return response.json();
+      })
+      .then((data) => {
         setIsLoading(false);
+        setClients(data);
       })
 
       .catch((error) => {
@@ -53,9 +113,55 @@ export default function ClientList() {
     <main className="main-container">
       <div className="card">
         <div className="card-inner">
-          <MDBBtn onClick={toggleShow}>adicionar cliente</MDBBtn>
+          <MDBBtn onClick={toggleShow}>Adicionar pedido</MDBBtn>
           <MDBModal show={basicModal} setShow={setBasicModal} tabIndex="-1">
-            {/* Resto do seu código do modal */}
+            <MDBModalDialog>
+              <MDBModalContent>
+                <MDBModalHeader>
+                  <MDBModalTitle>Adicionar cliente</MDBModalTitle>
+                  <MDBBtn
+                    className="btn-close"
+                    color="none"
+                    onClick={toggleShow}
+                  ></MDBBtn>
+                </MDBModalHeader>
+                <MDBModalBody>
+                  <form className="form-group">
+                    <label htmlFor="cadInputName" className="form-label">
+                      nome
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control mb-3"
+                      id="cadInputName"
+                      aria-describedby="nameHelp"
+                      placeholder="Digite o nome do contato"
+                      name="clientName"
+                      onChange={handleInputChange}
+                    />
+                    <label htmlFor="cadInputCPF" className="form-label">
+                      CPF
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control mb-3"
+                      id="cadInputCPF"
+                      aria-describedby="nameHelp"
+                      placeholder="Digite o CPF"
+                      name="cpf"
+                      onChange={handleInputChange}
+                    />
+                  </form>
+                </MDBModalBody>
+
+                <MDBModalFooter>
+                  <MDBBtn color="secondary" onClick={toggleShow}>
+                    fechar
+                  </MDBBtn>
+                  <MDBBtn onClick={addNewClient}>Adicionar cliente</MDBBtn>
+                </MDBModalFooter>
+              </MDBModalContent>
+            </MDBModalDialog>
           </MDBModal>{" "}
         </div>
         <table className="clientTable">
@@ -72,27 +178,13 @@ export default function ClientList() {
               <tr key={client._id}>
                 <td>{client._id}</td>
                 <td>{client.name}</td>
-                <td>{client.CPF}</td>{" "}
-                {/* O CPF será mascarado apenas com os três últimos dígitos visíveis */}
+                <td>{client.cpf}</td>
                 <td>LINK DO CLIENTID</td>
               </tr>
             ))}
-          </tbody>{" "}
+          </tbody>
         </table>
       </div>
     </main>
   );
-}
-
-function maskLast3DigitsOfCPF(cpf) {
-  // Remove caracteres não numéricos do CPF
-  cpf = cpf.replace(/\D/g, "");
-
-  // Mantém os 4 últimos dígitos visíveis e mascara os demais
-  cpf = cpf.substring(0, cpf.length - 4).replace(/\d/g, "X") + cpf.slice(-4);
-
-  // Aplica a máscara "XXX.XXX.XXX-####"
-  cpf = cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{4})/, "$1.$2.$3-$4");
-
-  return cpf;
 }
