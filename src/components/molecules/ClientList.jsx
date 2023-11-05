@@ -36,7 +36,7 @@ export default function ClientList() {
 
     // Enviar os dados do novo cliente para o servidor
     fetch(
-      "https://prismanager-back-end-e59wfm9k1-pateiharas-projects.vercel.app/listclients/",
+      "https://prismanager-back-end-1ple8v0as-pateiharas-projects.vercel.app/listclients/",
       {
         method: "POST",
         headers: {
@@ -57,7 +57,7 @@ export default function ClientList() {
         console.log("Data:", data);
         // Atualizar a lista de clientes após adicionar um novo cliente
         fetch(
-          "https://prismanager-back-end-e59wfm9k1-pateiharas-projects.vercel.app/listclients/clients"
+          "https://prismanager-back-end-1ple8v0as-pateiharas-projects.vercel.app/listclients/clients"
         )
           .then((response) => {
             if (!response.ok) {
@@ -85,7 +85,7 @@ export default function ClientList() {
     console.log("chamada x:", newClientData);
     // Fetch data from your API when the component mounts
     fetch(
-      "https://prismanager-back-end-e59wfm9k1-pateiharas-projects.vercel.app/listclients/clients"
+      "https://prismanager-back-end-1ple8v0as-pateiharas-projects.vercel.app/listclients/clients"
     )
       .then((response) => {
         console.log("Response:", response); // Adicione esta linha para depuração
