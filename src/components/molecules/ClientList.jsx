@@ -148,7 +148,7 @@ export default function ClientList() {
                       id="cadInputCPF"
                       aria-describedby="nameHelp"
                       placeholder="Digite o CPF"
-                      name="cpf"
+                      name="clientCpf"
                       onChange={handleInputChange}
                     />
                   </form>
