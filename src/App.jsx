@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 
 import Clients from "./components/pages/Clients";
+import Gerenciador from "./components/pages/Gerenciador"
 import Orders from "./components/pages/Orders";
 import Login from "./components/pages/Login";
 import Logout from "./components/pages/Logout";
@@ -34,6 +35,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/clients" element={<Clients />} />
+        <Route path="/gerenciador" element={<Gerenciador />} />
         <Route path="/clients/orders" element={<Orders />} />
         <Route path="/logout" element={<Logout />} />
         <Route element={<ProtectedRoute />}>

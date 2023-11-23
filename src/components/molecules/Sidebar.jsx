@@ -37,6 +37,11 @@ function Sidebar({ openSidebarToggle, OpenSidebar }) {
           </a>
         </li>
         <li className="sidebar-list-item ">
+          <a href="/gerenciador">
+            <BsPeopleFill className="icon" /> Gerenciador
+          </a>
+        </li>
+        <li className="sidebar-list-item ">
           <a href="/clients/orders">
             <BsListCheck className="icon" /> Solicitações
           </a>
