@@ -30,16 +30,15 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/landing" element={<Landing />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/clients" element={<Clients />} />
         <Route path="/gerenciador" element={<Gerenciador />} />
-        <Route path="/clients/orders" element={<Orders />} />
+        <Route path="/clients/:clientId/orders" element={<Orders />} />
         <Route path="/logout" element={<Logout />} />
         <Route element={<ProtectedRoute />}>
-        <Route path="*" element={<div>Not found</div>} />
+          <Route path="*" element={<div>Not found</div>} />
         </Route>
       </Routes>
     </BrowserRouter>
