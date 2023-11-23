@@ -50,7 +50,7 @@ function OrderList() {
   const addNewOrder = () => {
     console.log("Dados do Cliente a ser Enviados:", newOrderData);
     // Enviar os dados do novo cliente para o servidor
-    fetch(`http://localhost:8080/clients/${clientId}/orders`, {
+    fetch(`https://prismanager-back-end-5y3x7xfa2-pateiharas-projects.vercel.app/clients/${clientId}/orders`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +72,7 @@ function OrderList() {
         console.log("Data:", data);
 
         // Atualizar a lista de clientes após adicionar um novo cliente
-        fetch(`http://localhost:8080/clients/${clientId}/orders`)
+        fetch(`https://prismanager-back-end-5y3x7xfa2-pateiharas-projects.vercel.app/clients/${clientId}/orders`)
           .then((response) => {
             if (!response.ok) {
               throw new Error("Falha na solicitação à API");
@@ -98,7 +98,7 @@ function OrderList() {
     setIsLoading(true);
     console.log("chamada x:", newOrderData);
     // Fetch data from your API when the component mounts
-    fetch(`http://localhost:8080/clients/${clientId}/orders`)
+    fetch(`https://prismanager-back-end-5y3x7xfa2-pateiharas-projects.vercel.app/clients/${clientId}/orders`)
       .then((response) => {
         console.log("Response:", response); //linha para depuração
 
